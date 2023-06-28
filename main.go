@@ -15,6 +15,7 @@ type (
         Status     string `json:"status"`
         Message    string `json:"message"`
         ReturnCode string `json:"returnCode"`
+        UserData   string `json:"userData"`
     }
 )
 
@@ -48,6 +49,7 @@ func (h *SampleHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
         Status:     "OK",
         Message:    h.Data,
         ReturnCode: strconv.Itoa(returnCode),
+        UserData:   "ユーザーネーム",
     }
     // レスポンスヘッダーの設定
     w.Header().Set("Content-Type", "application/json; charset=UTF-8")
