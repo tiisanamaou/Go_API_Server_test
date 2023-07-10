@@ -24,6 +24,7 @@ type (
 func main() {
 	// Add Method GET
 	http.HandleFunc("/get", router.GetAPI)
+	http.HandleFunc("/post", post)
 	http.ListenAndServe(":8080", nil)
 
 	// httpHandlerの準備
