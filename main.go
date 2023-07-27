@@ -63,10 +63,10 @@ func (h *SampleHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	// CROSエラーが出ないようにする設定
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 
-	// ステータスコードを設定
-	w.WriteHeader(returnCode)
+	// ステータスコードを設定、200
+	w.WriteHeader(http.StatusOK)
 
 	// httpResponseの内容を書き込む
-	buf, _ := json.MarshalIndent(res, "", "    ")
+	buf, _ := json.Marshal(res)
 	_, _ = w.Write(buf)
 }

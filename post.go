@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 )
 
@@ -22,17 +23,19 @@ func post(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
+	// ステータスコードを設定、200
+	w.WriteHeader(http.StatusOK)
 
 	// Add Response
 	postResponse := PostResponse{
 		UserID:   "0001",
 		UserRank: 10,
-		UserName: "maomao",
+		UserName: "maomao_post",
 	}
 	fmt.Println(postResponse)
 	jsonData, err := json.Marshal(postResponse)
 	if err != nil {
-		fmt.Println(err)
+		log.Println(err)
 		return
 	}
 	fmt.Println(jsonData)

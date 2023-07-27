@@ -15,7 +15,7 @@ type PostResponse struct {
 func GetAPI(w http.ResponseWriter, r *http.Request) {
 	//Validate request
 	if r.Method != "GET" {
-		w.WriteHeader(http.StatusBadRequest)
+		w.WriteHeader(http.StatusBadRequest) //400
 		return
 	}
 	// レスポンスヘッダーの設定
@@ -23,11 +23,16 @@ func GetAPI(w http.ResponseWriter, r *http.Request) {
 	// CROSエラーが出ないようにする設定
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 
+	// ステータスコードを設定
+	//returnCode := 204
+	//w.WriteHeader(returnCode)
+	w.WriteHeader(http.StatusOK) //200
+
 	// Add Response
 	postResponse := PostResponse{
 		UserID:   "0002",
 		UserRank: 15,
-		UserName: "sana",
+		UserName: "sana_get",
 	}
 	jsonData, err := json.Marshal(postResponse)
 	if err != nil {
