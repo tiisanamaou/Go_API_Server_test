@@ -8,7 +8,7 @@ import (
 )
 
 type PostResponse struct {
-	UserID   string `json:"UseID"`
+	UserID   string `json:"UserID"`
 	UserRank int    `json:"UserRank"`
 	UserName string `json:"UserName"`
 }
@@ -23,6 +23,8 @@ func post(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
+	// レスポンスヘッダーの設定
+	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	// ステータスコードを設定、200
 	w.WriteHeader(http.StatusOK)
 
@@ -32,18 +34,19 @@ func post(w http.ResponseWriter, r *http.Request) {
 		UserRank: 10,
 		UserName: "maomao_post",
 	}
-	fmt.Println(postResponse)
+	//fmt.Println(postResponse)
 	jsonData, err := json.Marshal(postResponse)
 	if err != nil {
 		log.Println(err)
 		return
 	}
-	fmt.Println(jsonData)
+	//fmt.Println(jsonData)
 	fmt.Println(string(jsonData))
 
 	len := r.ContentLength
 	body := make([]byte, len) // Content-Length と同じサイズの byte 配列を用意
 	r.Body.Read(body)         // byte 配列にリクエストボディを読み込む
-	//fmt.Fprintln(w, string(body))
-	fmt.Fprintln(w, string(jsonData))
+	fmt.Fprintln(w, string(body))
+	fmt.Println(string(body))
+	//fmt.Fprintln(w, string(jsonData))
 }

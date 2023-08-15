@@ -7,7 +7,7 @@ import (
 )
 
 type PostResponse struct {
-	UserID   string `json:"UseID"`
+	UserID   string `json:"UserID"`
 	UserRank int    `json:"UserRank"`
 	UserName string `json:"UserName"`
 }
@@ -22,17 +22,14 @@ func GetAPI(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	// CROSエラーが出ないようにする設定
 	w.Header().Set("Access-Control-Allow-Origin", "*")
-
 	// ステータスコードを設定
-	//returnCode := 204
-	//w.WriteHeader(returnCode)
 	w.WriteHeader(http.StatusOK) //200
 
 	// Add Response
 	postResponse := PostResponse{
 		UserID:   "0002",
 		UserRank: 15,
-		UserName: "sana_get",
+		UserName: "_sana_",
 	}
 	jsonData, err := json.Marshal(postResponse)
 	if err != nil {

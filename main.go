@@ -2,9 +2,9 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"golang-server/router"
 
-	//"log"
 	"net/http"
 	"strconv"
 )
@@ -23,6 +23,7 @@ type (
 
 func main() {
 	// Add Method GET
+	fmt.Println("Go Server Start")
 	http.HandleFunc("/get", router.GetAPI)
 	http.HandleFunc("/post", post)
 	http.ListenAndServe(":8080", nil)
