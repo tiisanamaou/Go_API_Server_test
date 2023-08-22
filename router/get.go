@@ -6,7 +6,7 @@ import (
 	"net/http"
 )
 
-type PostResponse struct {
+type ResponseData struct {
 	UserID   string `json:"UserID"`
 	UserRank int    `json:"UserRank"`
 	UserName string `json:"UserName"`
@@ -26,12 +26,12 @@ func GetAPI(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK) //200
 
 	// Add Response
-	postResponse := PostResponse{
+	responseData := ResponseData{
 		UserID:   "0002",
 		UserRank: 15,
 		UserName: "_sana_",
 	}
-	jsonData, err := json.Marshal(postResponse)
+	jsonData, err := json.Marshal(responseData)
 	if err != nil {
 		fmt.Println(err)
 		return

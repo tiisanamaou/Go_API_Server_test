@@ -27,17 +27,6 @@ func main() {
 	http.HandleFunc("/get", router.GetAPI)
 	http.HandleFunc("/post", post)
 	http.ListenAndServe(":8080", nil)
-
-	// httpHandlerの準備
-	//mux := &http.ServeMux{}
-
-	// httpHandlerの設定。第1引数に設定したURLへ接続すると第2引数のHandler処理が実行されるようになる
-	//mux.Handle("/api", NewSampleHandler())
-
-	// httpサーバー起動処理。引数にはポート番号とhttpHandlerを設定する
-	//if err := http.ListenAndServe(":8080", mux); err != nil {
-	//	log.Fatal(err)
-	//}
 }
 
 // SampleHandlerの構造体にinterfaceのhttp.Handlerを設定して返す関数
