@@ -1,24 +1,10 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
 	"golang-server/router"
 
 	"net/http"
-	"strconv"
-)
-
-type (
-	SampleHandler struct {
-		Data string
-	}
-	SampleResponse struct {
-		Status     string `json:"status"`
-		Message    string `json:"message"`
-		ReturnCode string `json:"returnCode"`
-		UserData   string `json:"userData"`
-	}
 )
 
 func main() {
@@ -27,36 +13,4 @@ func main() {
 	http.HandleFunc("/get", router.GetAPI)
 	http.HandleFunc("/post", post)
 	http.ListenAndServe(":8080", nil)
-}
-
-// SampleHandlerの構造体にinterfaceのhttp.Handlerを設定して返す関数
-// interfaceのhttp.HandlerにはServeHTTP関数が含まれており、後の処理ListenAndServe関数から呼び出される
-func NewSampleHandler() http.Handler {
-	return &SampleHandler{"テストテキスト"}
-}
-
-// http.Handlerのinterfaceで定義されているServeHTTP関数を作成する。
-// ServeHTTP関数はListenAndServe関数内で呼び出される
-func (h *SampleHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	// リターンコードの設定
-	returnCode := 200
-
-	// httpResponseの内容を設定
-	res := &SampleResponse{
-		Status:     "OK",
-		Message:    h.Data,
-		ReturnCode: strconv.Itoa(returnCode),
-		UserData:   "ユーザーネーム",
-	}
-	// レスポンスヘッダーの設定
-	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
-	// CROSエラーが出ないようにする設定
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-
-	// ステータスコードを設定、200
-	w.WriteHeader(http.StatusOK)
-
-	// httpResponseの内容を書き込む
-	buf, _ := json.Marshal(res)
-	_, _ = w.Write(buf)
 }
